@@ -4,8 +4,9 @@
 #ifndef __BATTERY_H__
 #define __BATTERY_H__
 #include <string.h>
+#include "generator.hh"
 
-class Battery {
+class Battery: public Generator {
 private:
     enum battery_state : int {
         CHARGING,
@@ -23,10 +24,8 @@ private:
     const std::string STATUS_FILE = "status";
 
     battery bat0;
-
-    void init();
+    void collect();
 public:
-    std::string battery_json();
-    Battery();
+    std::string generate_json();
 };
 #endif

@@ -1,7 +1,5 @@
-/* Prints a battery bar to stdout, e.g.
- * ● ▣▣▣▣▣▢▢▢▢▢
- *
- * To compile: g++ -std=c++11 battery-bar.cpp -o battery-bar
+/* Generates the battery info
+ * Reads the info from /proc
  *
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
@@ -13,11 +11,7 @@
 
 using namespace std;
 
-Battery::Battery() {
-    init();
-}
-
-void Battery::init()
+void Battery::collect()
 {
     string state = Common::read_first_line(BAT0_PATH + STATUS_FILE);
     if (state == "Charging")
@@ -34,7 +28,8 @@ void Battery::init()
     bat0.percent = static_cast<int>(((double)now / full) * 100 + 0.5);
 }
 
-string Battery::battery_json() {
+string Battery::generate_json() {
+    this->collect();
     string status;
     switch(bat0.state) {
         case CHARGING:
