@@ -1,7 +1,7 @@
 NAME=status-to-json
 CFLAGS=-g -Wall -std=c++11 -o bin/$(NAME)
 SRCS=*.cc
-LIBS=-l asound
+LIBS=-lasound -liw
 CC=g++
 
 # Do all
