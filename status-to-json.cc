@@ -14,11 +14,19 @@
 #include "wifi.hh"
 #include "memory.hh"
 #include "cpu.hh"
+ #include <signal.h>
 
 using namespace std;
 
+void signal_handler(int signum)
+{
+    // We only need to catch these to interrupt sleep(x);
+}
+
 int main(int argc, char *argv[])
 {
+    signal(SIGUSR1, signal_handler);
+    signal(SIGUSR2, signal_handler);
     vector<unique_ptr<Generator>> generators;
     generators.push_back(unique_ptr<CPU>(new CPU()));
     generators.push_back(unique_ptr<Memory>(new Memory()));
@@ -27,9 +35,9 @@ int main(int argc, char *argv[])
     generators.push_back(unique_ptr<Volume>(new Volume()));
     generators.push_back(unique_ptr<DateTime>(new DateTime()));
 
-    //while(true) {
+    while(true) {
         for(unsigned int i = 0; i < generators.size(); i++)
             cout << generators.at(i)->generate_json() << endl;
-    //    sleep(2);
-    //}
+        sleep(2);
+    }
 }

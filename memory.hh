@@ -6,6 +6,13 @@
 #include "generator.hh"
 
 class Memory: public Generator {
+private:
+    struct meminfo {
+        /* memory information in kilobytes */
+        unsigned long long mem, memfree, memmax;
+        unsigned long long bufmem, buffers, cached;
+        unsigned long long shmem, sreclaimable;
+    };
 public:
     std::string generate_json();
 };
