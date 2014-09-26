@@ -4,7 +4,11 @@
  */
 #include <string>
 #include <ctime>
+#include <map>
 #include "datetime.hh"
+#include "common.hh"
+
+#include <iostream>
 
 using namespace std;
 
@@ -20,5 +24,10 @@ string DateTime::current_datetime() {
 }
 
 string DateTime::generate_json() {
-    return string(current_datetime());
+    map<string, string> m;
+    
+    m["full_text"] = "  " + current_datetime();
+    m["color"] = COLOR_DEFAULT;
+    m["separator"] = "false";
+    return Common::map_to_json(m);
 }
