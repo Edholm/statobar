@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     signal(SIGUSR1, signal_handler);
     signal(SIGUSR2, signal_handler);
     vector<unique_ptr<Generator>> generators;
-    //generators.push_back(unique_ptr<CPU>(new CPU()));
+    generators.push_back(unique_ptr<CPU>(new CPU()));
     generators.push_back(unique_ptr<Memory>(new Memory()));
     generators.push_back(unique_ptr<Wifi>(new Wifi()));
     generators.push_back(unique_ptr<Battery>(new Battery()));

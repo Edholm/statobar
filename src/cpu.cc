@@ -15,7 +15,7 @@
 using namespace std;
 using namespace boost;
 
-string CPU::generate_json() {
+unsigned int CPU::calc_usage() {
     string stat = Common::read_first_line("/proc/stat");
     unsigned long long total_jiffies = 0, work_jiffies = 0;
     vector<string> jiffies_str;
@@ -32,9 +32,27 @@ string CPU::generate_json() {
     float work, total;
     work = work_jiffies - prev_work_jiffies;
     total = total_jiffies - prev_total_jiffies;
-    unsigned int perc = work / total * 100;
-
     prev_total_jiffies = total_jiffies;
     prev_work_jiffies = work_jiffies;
-    return "CPU: " + Common::make_bar(perc);
+
+    return work / total * 100;
+}
+
+string CPU::generate_json() {
+    unsigned int usage = calc_usage();
+    string filler = Common::filler_json("  CPU ");
+    string color;
+    if(usage >= 70) {
+        color = COLOR_CRIT;
+    } else if(usage >= 45) {
+        color = COLOR_WARN;
+    } else {
+        color = COLOR_DEFAULT;
+    }
+
+    map<string, string> m;
+    m["full_text"] = Common::make_bar(usage) + " ";
+    m["color"] = color;
+
+    return filler + Common::map_to_json(m);
 };

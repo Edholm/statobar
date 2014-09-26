@@ -7,6 +7,7 @@
 
 class CPU: public Generator {
 private:
+    unsigned int calc_usage();
     unsigned long long prev_total_jiffies, prev_work_jiffies;
 public:
     std::string generate_json();
