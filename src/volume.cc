@@ -79,7 +79,7 @@ string Volume::generate_json() {
         color = COLOR_DEFAULT;
     }
 
-    string filler_ft = (is_muted()) ? "ׅ  " : "ׅ  ";
+    string filler_ft = (is_muted()) ? " ׅ  " : " ׅ  ";
     map<string, string> volBar;
     volBar["color"] = color;
     volBar["full_text"] = Common::make_bar(vol) + " ";

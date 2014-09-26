@@ -6,6 +6,7 @@
 #define COLOR_DEFAULT "#839496"
 #define COLOR_CRIT "#c00000"
 #define COLOR_WARN "#b58900"
+#define COLOR_GOOD "#00c000"
 
 class Common {
 public:

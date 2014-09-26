@@ -30,19 +30,37 @@ void Battery::collect()
 
 string Battery::generate_json() {
     this->collect();
-    string status;
+    string status, color;
     switch(bat0.state) {
         case CHARGING:
             status.append("  ");
+            color = COLOR_GOOD;
             break;
         case DISCHARGING:
             status.append("◯ ");
+            if(bat0.percent >= 70) {
+                color = COLOR_GOOD;
+            } else if(bat0.percent >= 40) {
+                color = COLOR_DEFAULT;
+            } else if(bat0.percent >= 20) {
+                color = COLOR_WARN;
+            } else {
+                status.append(to_string(bat0.percent) + "% ");
+                color = COLOR_CRIT;
+            }
             break;
         default:
             status.append("● ");
+            color = COLOR_DEFAULT;
             break;
     }
-    return status.append(Common::make_bar(bat0.percent, 10));
+    string filler = Common::filler_json(" ");
+
+    map<string, string> m;
+    m["full_text"] = status.append(Common::make_bar(bat0.percent, 10)) + " ";
+    m["color"] = color;
+
+    return filler + Common::map_to_json(m);
 }
 
 
