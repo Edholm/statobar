@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iwlib.h>
 #include "wifi.hh"
+#include "common.hh"
 
 using namespace std;
 
@@ -47,8 +48,19 @@ Wifi::winfo Wifi::collect() {
 
 string Wifi::generate_json() {
     struct winfo wi = collect();
-    if(!wi.is_connected) {
-        return "Not connected!";
+    string filler = Common::filler_json("  " + wi.essid + " ");
+    string color;
+    if(wi.quality <= 20) {
+        color = COLOR_WARN;
+    } else if(wi.quality < 90) {
+        color = COLOR_DEFAULT;
+    } else {
+        color = COLOR_GOOD;
     }
-    return wi.essid + " (" + to_string(wi.quality) + "%)";
+
+    map<string, string> m;
+    m["full_text"] = Common::make_bar(wi.quality) + " ";
+    m["color"] = color;
+
+    return filler + Common::map_to_json(m);
 };

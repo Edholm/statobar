@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     vector<unique_ptr<Generator>> generators;
     //generators.push_back(unique_ptr<CPU>(new CPU()));
     //generators.push_back(unique_ptr<Memory>(new Memory()));
-    //generators.push_back(unique_ptr<Wifi>(new Wifi()));
+    generators.push_back(unique_ptr<Wifi>(new Wifi()));
     generators.push_back(unique_ptr<Battery>(new Battery()));
     generators.push_back(unique_ptr<Volume>(new Volume()));
     generators.push_back(unique_ptr<DateTime>(new DateTime()));
