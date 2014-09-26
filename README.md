@@ -1,5 +1,6 @@
 status-to-json
 ==========
+This is an alternative to Conky that I wrote as an exercise in C++. Saves me a few CPU cycles compared to Conky and gives me more customizability.
 
 ## Compile & install
 ``` bash
