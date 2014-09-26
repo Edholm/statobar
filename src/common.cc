@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <math.h>
+#include <map>
 #include "common.hh"
 using namespace std;
 
@@ -30,4 +31,17 @@ string Common::make_bar(int usage, int width, string tick_full, string tick_empt
         bar.append(tick_empty);
 
     return bar;
+}
+
+string Common::map_to_json(map<string, string> m) {
+    string json = "{ ";
+    for (map<string, string>::iterator p = m.begin(); p != m.end(); ++p ) {
+        json += "\"" + p->first + "\" : \"" + p->second + "\"";
+        if ((p != m.end()) && (next(p) != m.end())) {
+            // If we're not on the last element, add comma.
+            json += ", ";
+        }
+    }
+    json += " }";
+    return json;
 }
