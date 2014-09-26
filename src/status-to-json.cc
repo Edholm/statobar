@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     //generators.push_back(unique_ptr<Memory>(new Memory()));
     //generators.push_back(unique_ptr<Wifi>(new Wifi()));
     //generators.push_back(unique_ptr<Battery>(new Battery()));
-    //generators.push_back(unique_ptr<Volume>(new Volume()));
+    generators.push_back(unique_ptr<Volume>(new Volume()));
     generators.push_back(unique_ptr<DateTime>(new DateTime()));
 
     cout << "{\"version\" : 1} [ [],";
@@ -40,6 +40,9 @@ int main(int argc, char *argv[])
         cout << "[";
         for(unsigned int i = 0; i < generators.size(); i++) {
             cout << generators.at(i)->generate_json();
+            if(i+1 < generators.size()) {
+                cout << ", ";
+            }
         }
         cout << "],";
         

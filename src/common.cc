@@ -36,7 +36,13 @@ string Common::make_bar(int usage, int width, string tick_full, string tick_empt
 string Common::map_to_json(map<string, string> m) {
     string json = "{ ";
     for (map<string, string>::iterator p = m.begin(); p != m.end(); ++p ) {
-        json += "\"" + p->first + "\" : \"" + p->second + "\"";
+        json += "\"" + p->first + "\" : ";
+        if(p->first == "full_text" || p->first == "color") {
+            json += "\"" + p->second + "\"";
+        } else {
+            json += p->second;
+        }
+
         if ((p != m.end()) && (next(p) != m.end())) {
             // If we're not on the last element, add comma.
             json += ", ";
@@ -44,4 +50,13 @@ string Common::map_to_json(map<string, string> m) {
     }
     json += " }";
     return json;
+}
+
+string Common::filler_json(string full_text, string color) {
+    map<string, string> filler;
+    filler["color"] = color;
+    filler["separator"] = "false";
+    filler["separator_block_width"] = "0";
+    filler["full_text"] = full_text;
+    return Common::map_to_json(filler) + ", ";
 }

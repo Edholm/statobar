@@ -18,12 +18,11 @@ private:
 
     bool setup_failed;
 
+    void init_mixer();
     void error_close(const char*, int, snd_mixer_t*);
     bool is_muted();
     int get_volume();
  public:
-    Volume();
-    ~Volume();
     std::string generate_json();
  };
 #endif

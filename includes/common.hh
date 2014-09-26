@@ -14,6 +14,8 @@ public:
                                 std::string tick_full = "▣",
                                 std::string tick_empty = "▢");
     static std::string map_to_json(std::map<std::string, std::string>);
+    static std::string filler_json(std::string full_text,
+                                   std::string color = COLOR_DEFAULT);
 };
 
 #endif

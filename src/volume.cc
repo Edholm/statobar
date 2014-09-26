@@ -12,8 +12,7 @@
 
 using namespace std;
 
-
-Volume::Volume() {
+void Volume::init_mixer() {
     int err;
     if ((err = snd_mixer_open(&h_mixer, 1)) < 0)
         error_close("Mixer open error: %s\n", err, NULL);
@@ -36,11 +35,6 @@ Volume::Volume() {
             error_close("Cannot find simple element\n", 0, h_mixer);
 
     setup_failed = false;
-}
-
-Volume::~Volume() {
-    // Cleanup on aisle three!
-    snd_mixer_close(h_mixer);
 }
 
 void Volume::error_close(const char *errmsg, int err, snd_mixer_t *h_mixer) {
@@ -73,6 +67,23 @@ int Volume::get_volume() {
 };
 
 string Volume::generate_json() {
-    string muted = (is_muted()) ? "(muted) " : "";
-    return "Vol " + muted + Common::make_bar(get_volume());
+    init_mixer();
+    string color;
+    int vol = get_volume();
+    
+    if(is_muted()) {
+        color = COLOR_CRIT;
+    } else if(vol >= 95) {
+        color = COLOR_WARN;
+    } else {
+        color = COLOR_DEFAULT;
+    }
+
+    string filler_ft = (is_muted()) ? "ׅ  " : "ׅ  ";
+    map<string, string> volBar;
+    volBar["color"] = color;
+    volBar["full_text"] = Common::make_bar(vol) + " ";
+
+    snd_mixer_close(h_mixer);
+    return Common::filler_json(filler_ft) + Common::map_to_json(volBar);
 };
