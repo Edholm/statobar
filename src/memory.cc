@@ -40,5 +40,18 @@ string Memory::generate_json() {
     info.mem = info.memmax - info.memfree;
     
     int usage = info.mem * 100 / info.memmax;
-    return "Mem: " + Common::make_bar(usage);
+    string color;
+    if(usage >= 80) {
+        color = COLOR_CRIT;
+    } else if(usage >= 60) {
+        color = COLOR_WARN;
+    } else {
+        color = COLOR_DEFAULT;
+    }
+
+    string filler = Common::filler_json("  Mem ");
+    map<string, string> m;
+    m["full_text"] = Common::make_bar(usage) + " ";
+    m["color"] = color;
+    return filler + Common::map_to_json(m);
 };

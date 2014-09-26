@@ -73,7 +73,7 @@ string Volume::generate_json() {
     
     if(is_muted()) {
         color = COLOR_CRIT;
-    } else if(vol >= 95) {
+    } else if(vol >= 90) {
         color = COLOR_WARN;
     } else {
         color = COLOR_DEFAULT;
