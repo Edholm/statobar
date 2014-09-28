@@ -7,6 +7,9 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <signal.h>
+#include <chrono>
+#include <thread>
 #include "battery.hh"
 #include "generator.hh"
 #include "datetime.hh"
@@ -14,7 +17,6 @@
 #include "wifi.hh"
 #include "memory.hh"
 #include "cpu.hh"
- #include <signal.h>
 
 using namespace std;
 
@@ -35,7 +37,12 @@ int main(int argc, char *argv[])
     generators.push_back(unique_ptr<Volume>(new Volume()));
     generators.push_back(unique_ptr<DateTime>(new DateTime()));
 
-    cout << "{\"version\" : 1} [ [],";
+    cout << "{\"version\":1}\n[[],\n";
+    fflush(stdout);
+    // We need to wait for a bit to let i3bar recognize the protocoll,
+    // otherwise we'll have to wait one cycle for it to output the blocks.
+    this_thread::sleep_for(chrono::milliseconds(50));
+
     while(true) {
         cout << "[";
         for(unsigned int i = 0; i < generators.size(); i++) {
@@ -44,9 +51,8 @@ int main(int argc, char *argv[])
                 cout << ", ";
             }
         }
-        cout << "],";
-        
-        fflush(stdout);
+        cout << "]," << endl;
         sleep(2);
     }
+    cout << "]" << endl;
 }

@@ -2,9 +2,6 @@
  *
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
-#include <string>
-#include <iostream>
-#include <sys/ioctl.h>
 #include <sys/soundcard.h>
 #include <errno.h>
 #include "volume.hh"

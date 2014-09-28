@@ -2,8 +2,6 @@
  *
  * Copyright 2014 Emil Edholm <emil@edholm.it>
 */
-#include <string>
-#include <iostream>
 #include <iwlib.h>
 #include "wifi.hh"
 #include "common.hh"

@@ -1,6 +1,7 @@
 /*
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
+#pragma once
 #ifndef __CPU_H__
 #define __CPU_H__
 #include "generator.hh"

@@ -2,7 +2,6 @@
  *
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
-#include <string>
 #include <ctime>
 #include <map>
 #include "datetime.hh"

@@ -3,7 +3,6 @@
  * Copyright 2014 Emil Edholm <emil@edholm.it>
 */
 
-#include <string>
 #include <fstream>
 #include "memory.hh"
 #include "common.hh"

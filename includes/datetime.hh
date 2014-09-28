@@ -1,6 +1,7 @@
 /*
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
+#pragma once
 #ifndef __DATETIME_H__
 #define __DATETIME_H__
 #include "generator.hh"

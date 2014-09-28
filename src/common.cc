@@ -2,7 +2,6 @@
  *
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
-#include <string>
 #include <fstream>
 #include <math.h>
 #include <map>

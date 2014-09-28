@@ -3,8 +3,6 @@
  * Copyright 2014 Emil Edholm <emil@edholm.it>
 */
 
-#include <string>
-#include <fstream>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>

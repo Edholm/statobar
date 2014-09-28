@@ -1,6 +1,7 @@
 /*
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
+#pragma once
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 #include "generator.hh"

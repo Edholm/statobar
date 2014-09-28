@@ -1,9 +1,9 @@
 /*
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
+#pragma once
 #ifndef __BATTERY_H__
 #define __BATTERY_H__
-#include <string.h>
 #include "generator.hh"
 
 class Battery: public Generator {

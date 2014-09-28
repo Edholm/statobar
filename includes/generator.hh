@@ -3,8 +3,10 @@
  *
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
- #ifndef __GENERATOR_H__
+#pragma once
+#ifndef __GENERATOR_H__
 #define __GENERATOR_H__
+
 #include <string>
 
 class Generator {

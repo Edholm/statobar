@@ -1,6 +1,7 @@
 /*
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
+#pragma once
 #ifndef __VOLUME_H__
 #define __VOLUME_H__
 #include <alsa/asoundlib.h>

@@ -3,9 +3,6 @@
  *
  * Copyright 2014 Emil Edholm <emil@edholm.it>
  */
-#include <iostream>
-#include <string.h>
-#include <stdlib.h>
 #include "battery.hh"
 #include "common.hh"
 
