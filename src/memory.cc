@@ -11,7 +11,7 @@ using namespace std;
 
 string Memory::generate_json() {
     meminfo info;
-    
+
     ifstream file("/proc/meminfo", ios::binary);
     string line;
     if(file.good()) {
@@ -37,7 +37,7 @@ string Memory::generate_json() {
     file.close();
     info.memfree = info.memfree + info.buffers + info.cached - info.shmem + info.sreclaimable;
     info.mem = info.memmax - info.memfree;
-    
+
     int usage = info.mem * 100 / info.memmax;
     string color;
     if(usage >= 80) {
@@ -48,9 +48,13 @@ string Memory::generate_json() {
         color = COLOR_DEFAULT;
     }
 
+    if(usage < 45) {
+        return "";
+    }
+
     string filler = Common::filler_json("  Mem ");
     map<string, string> m;
     m["full_text"] = Common::make_bar(usage) + " ";
     m["color"] = color;
-    return filler + Common::map_to_json(m);
+    return filler + ", " + Common::map_to_json(m);
 };

@@ -27,6 +27,7 @@ Wifi::winfo Wifi::collect() {
         }
         wi.quality = (winfo->stats.qual.qual*100) /
                         winfo->range.max_qual.qual;
+        wi.level = winfo->stats.qual.level;
 
         if (winfo->b.has_essid) {
             if (winfo->b.essid_on) {
@@ -48,7 +49,7 @@ string Wifi::generate_json() {
     struct winfo wi = collect();
     map<string, string> m;
     if(wi.is_connected) {
-        string filler = Common::filler_json("  " + wi.essid + " ");
+        string filler = Common::filler_json("  " + wi.essid + " ") + ", ";
         string color;
         if(wi.quality <= 20) {
             color = COLOR_WARN;
@@ -58,7 +59,7 @@ string Wifi::generate_json() {
             color = COLOR_GOOD;
         }
 
-        m["full_text"] = Common::make_bar(wi.quality) + " ";
+        m["full_text"] ="(" + to_string(wi.level) + " dBm) ";
         m["color"] = color;
         return filler + Common::map_to_json(m);
     } else {

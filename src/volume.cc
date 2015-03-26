@@ -65,22 +65,12 @@ int Volume::get_volume() {
 
 string Volume::generate_json() {
     init_mixer();
-    string color;
-    int vol = get_volume();
-    
+    string text = (is_muted()) ? " ׅ  " : " ׅ  ";
+    map<string, string> m;
+    m["full_text"] = text;
     if(is_muted()) {
-        color = COLOR_CRIT;
-    } else if(vol >= 90) {
-        color = COLOR_WARN;
-    } else {
-        color = COLOR_DEFAULT;
+        m["color"] = "red";
     }
-
-    string filler_ft = (is_muted()) ? " ׅ  " : " ׅ  ";
-    map<string, string> volBar;
-    volBar["color"] = color;
-    volBar["full_text"] = Common::make_bar(vol) + " ";
-
     snd_mixer_close(h_mixer);
-    return Common::filler_json(filler_ft) + Common::map_to_json(volBar);
+    return Common::map_to_json(m);
 };

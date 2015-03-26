@@ -46,7 +46,11 @@ int main(int argc, char *argv[])
     while(true) {
         cout << "[";
         for(unsigned int i = 0; i < generators.size(); i++) {
-            cout << generators.at(i)->generate_json();
+            string content = generators.at(i)->generate_json();
+            if(content.empty()) {
+                continue;
+            }
+            cout << content;
             if(i+1 < generators.size()) {
                 cout << ", ";
             }

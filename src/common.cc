@@ -57,5 +57,5 @@ string Common::filler_json(string full_text, string color) {
     filler["separator"] = "false";
     filler["separator_block_width"] = "0";
     filler["full_text"] = full_text;
-    return Common::map_to_json(filler) + ", ";
+    return Common::map_to_json(filler);
 }

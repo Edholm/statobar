@@ -24,7 +24,7 @@ unsigned int CPU::calc_usage() {
         total_jiffies += tmp;
         if(i < 4) { // The first three jiffies
             work_jiffies += tmp;
-        }  
+        }
     }
 
     float work, total;
@@ -48,9 +48,13 @@ string CPU::generate_json() {
         color = COLOR_DEFAULT;
     }
 
+    if(usage <= 15) {
+        return "";
+    }
+
     map<string, string> m;
     m["full_text"] = Common::make_bar(usage) + " ";
     m["color"] = color;
 
-    return filler + Common::map_to_json(m);
+    return filler + ", " + Common::map_to_json(m);
 };

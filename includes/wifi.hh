@@ -13,6 +13,7 @@ private:
     {
         std::string essid;
         int quality;
+        int8_t level;
         bool is_connected;
     };
 

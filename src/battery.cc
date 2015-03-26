@@ -57,7 +57,7 @@ string Battery::generate_json() {
     m["full_text"] = status.append(Common::make_bar(bat0.percent, 10)) + " ";
     m["color"] = color;
 
-    return filler + Common::map_to_json(m);
+    return filler + ", " + Common::map_to_json(m);
 }
 
 
