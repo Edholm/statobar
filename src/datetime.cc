@@ -18,14 +18,14 @@ string DateTime::current_datetime() {
 
     unsigned int buff_size = 25;
     char buffer [buff_size];
-    strftime (buffer, buff_size, "%A %d %b %R", timeinfo);
+    strftime (buffer, buff_size, "%a %d %b | %R", timeinfo);
     return buffer;
 }
 
 string DateTime::generate_json() {
     map<string, string> m;
 
-    m["full_text"] = "   " + current_datetime();
+    m["full_text"] = "  \uf252 " + current_datetime();
     m["color"] = COLOR_DEFAULT;
     m["separator"] = "false";
     return Common::map_to_json(m);
