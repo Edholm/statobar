@@ -8,6 +8,13 @@
 
 using namespace std;
 
+#define BATT_FULL_ICO "\uf240"
+#define BATT_HALF_ICO "\uf242"
+#define BATT_QUARTER_ICO "\uf243"
+#define BATT_3QUARTER_ICO "\uf241"
+#define BATT_EMPTY_ICO "\uf244"
+#define BATT_CHARGING_ICO "\uf0e7"
+
 void Battery::collect()
 {
     string state = Common::read_first_line(BAT0_PATH + STATUS_FILE);
@@ -30,31 +37,38 @@ string Battery::generate_json() {
     string status, color;
     switch(bat0.state) {
         case CHARGING:
-            status.append("  ");
+            status.append(BATT_CHARGING_ICO "  ");
             color = COLOR_GOOD;
             break;
         case DISCHARGING:
-            status.append("◯ ");
-            if(bat0.percent >= 70) {
+            if(bat0.percent > 78) {
                 color = COLOR_GOOD;
-            } else if(bat0.percent >= 40) {
+                status.append(BATT_FULL_ICO " ");
+            } else if(bat0.percent >= 55) {
                 color = COLOR_DEFAULT;
-            } else if(bat0.percent >= 20) {
+                status.append(BATT_3QUARTER_ICO " ");
+            } else if(bat0.percent >= 26) {
+                status.append(BATT_HALF_ICO " ");
+                color = COLOR_DEFAULT;
+            } else if(bat0.percent >= 10) {
+                status.append(BATT_QUARTER_ICO " ");
                 color = COLOR_WARN;
             } else {
-                status.append(to_string(bat0.percent) + "% ");
                 color = COLOR_CRIT;
+                status.append(BATT_EMPTY_ICO " ");
             }
             break;
         default:
-            status.append("● ");
+            status.append(BATT_FULL_ICO " ");
             color = COLOR_DEFAULT;
             break;
     }
     string filler = Common::filler_json(" ");
 
+    status.append(to_string(bat0.percent) + "% ");
     map<string, string> m;
-    m["full_text"] = status.append(Common::make_bar(bat0.percent, 10)) + " ";
+    //m["full_text"] = status.append(Common::make_bar(bat0.percent, 10)) + " ";
+    m["full_text"] = status;
     m["color"] = color;
 
     return filler + ", " + Common::map_to_json(m);
