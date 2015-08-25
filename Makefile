@@ -17,3 +17,8 @@ clean:
 	rm -f *.h~
 	rm -f *.cc~
 	rm -f Makefile~
+
+deploy:
+	rm ~/.i3/status-to-json
+	cp bin/$(NAME) ~/.i3/status-to-json
+	i3-msg restart
