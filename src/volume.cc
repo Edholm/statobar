@@ -65,11 +65,16 @@ int Volume::get_volume() {
 
 string Volume::generate_json() {
     init_mixer();
-    string text = (is_muted()) ? " ׅ  " : " ׅ  ";
     map<string, string> m;
-    m["full_text"] = text;
-    if(is_muted()) {
+    int volume = get_volume();
+    string text;
+    if(is_muted() || volume == 0) {
+        m["full_text"] = "  \uf026  ";
         m["color"] = "red";
+    } else if(volume > 50) {
+        m["full_text"] = "  \uf028  ";
+    } else {
+        m["full_text"] = "  \uf027  ";
     }
     snd_mixer_close(h_mixer);
     return Common::map_to_json(m);
