@@ -1,5 +1,5 @@
 NAME=status-to-json
-CFLAGS=-Iincludes -g -Wall -std=c++11 -o bin/$(NAME)
+CFLAGS=-Iincludes $(shell pkg-config --libs --cflags gio-2.0) -g -Wall -std=c++11 -o bin/$(NAME)
 SRCS=src/*.cc
 LIBS=-lasound -liw
 CC=g++
@@ -19,6 +19,6 @@ clean:
 	rm -f Makefile~
 
 deploy:
-	rm ~/.i3/status-to-json
-	cp bin/$(NAME) ~/.i3/status-to-json
+	rm ~/.i3/$(NAME)
+	cp bin/$(NAME) ~/.i3/$(NAME)
 	i3-msg restart
