@@ -28,3 +28,4 @@ $ i3-msg restart
 This would result in something like this:
 
 ![Result](screenshots/bar.png "Result")  
+![Result2](screenshots/bar2.png "Result2")  
