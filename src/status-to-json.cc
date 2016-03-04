@@ -15,7 +15,7 @@
 #include "generator.hh"
 #include "datetime.hh"
 #include "volume.hh"
-#include "wifi.hh"
+#include "network.hh"
 #include "memory.hh"
 #include "cpu.hh"
 #include "vpn.hh"
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     generators.push_back(unique_ptr<CPU>(new CPU()));
     generators.push_back(unique_ptr<Memory>(new Memory()));
     generators.push_back(unique_ptr<Bluetooth>(new Bluetooth()));
-    generators.push_back(unique_ptr<Wifi>(new Wifi()));
+    generators.push_back(unique_ptr<Network>(new Network()));
     generators.push_back(unique_ptr<VPN>(new VPN()));
     generators.push_back(unique_ptr<Battery>(new Battery()));
     generators.push_back(unique_ptr<Volume>(new Volume()));

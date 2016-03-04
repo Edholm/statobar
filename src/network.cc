@@ -3,12 +3,12 @@
  * Copyright 2014 Emil Edholm <emil@edholm.it>
 */
 #include <iwlib.h>
-#include "wifi.hh"
+#include "network.hh"
 #include "common.hh"
 
 using namespace std;
 
-Wifi::winfo Wifi::collect() {
+Network::winfo Network::collect() {
     struct winfo wi;
     int skfd;
     struct wireless_info *winfo;
@@ -45,7 +45,7 @@ Wifi::winfo Wifi::collect() {
     return wi;
 }
 
-string Wifi::generate_json() {
+string Network::generate_json() {
     struct winfo wi = collect();
     map<string, string> m;
     if(wi.is_connected) {
