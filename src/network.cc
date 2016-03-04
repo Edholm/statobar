@@ -63,8 +63,6 @@ string Network::generate_json() {
         m["color"] = color;
         return filler + Common::map_to_json(m);
     } else {
-        m["full_text"] = "   Not connected! ";
-        m["color"] = COLOR_WARN;
-        return Common::map_to_json(m);
+        return "";
     }
 };
