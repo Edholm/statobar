@@ -2,6 +2,9 @@
  *
  * Copyright 2014 Emil Edholm <emil@edholm.it>
 */
+#include <sys/types.h>
+#include <ifaddrs.h>
+#include <arpa/inet.h>
 #include <iwlib.h>
 #include "network.hh"
 #include "common.hh"
@@ -63,6 +66,29 @@ string Network::generate_json() {
         m["color"] = color;
         return filler + Common::map_to_json(m);
     } else {
+        // List any connected wired interfaces.
+        ifaddrs *ifap;
+        if(getifaddrs(&ifap) < 0) {
+            // fuqit, we're outta here
+            return "";
+        }
+        for(ifaddrs*it = ifap; it->ifa_next != NULL; it=it->ifa_next) {
+            if (it->ifa_addr == NULL || it->ifa_addr->sa_family != AF_INET) {
+                // We only care about ipv4 interfaces for now...
+                continue;
+            }
+            if(strcmp(it->ifa_name, INTERFACE) == 0 ||
+                    strcmp(it->ifa_name, "lo") == 0) {
+                // Ignore loopback and our wifi interface
+                 continue;
+            }
+            sockaddr_in* ipv4_addr = (sockaddr_in*)it->ifa_addr;
+            char *ipaddr = inet_ntoa(ipv4_addr->sin_addr);
+            m["full_text"] = " " + string(it->ifa_name) + " (" + ipaddr + ") ";
+            // Quit after first match...
+            freeifaddrs(ifap);
+            return Common::map_to_json(m);
+        }
         return "";
     }
 };
