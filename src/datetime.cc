@@ -25,7 +25,7 @@ string DateTime::current_datetime() {
 string DateTime::generate_json() {
     map<string, string> m;
 
-    m["full_text"] = "  \uf252 " + current_datetime();
+    m["full_text"] = "  \uf073 " + current_datetime();
     m["color"] = COLOR_DEFAULT;
     m["separator"] = "false";
     return Common::map_to_json(m);

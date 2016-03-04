@@ -13,7 +13,7 @@ using namespace std;
 #define BATT_QUARTER_ICO "\uf243"
 #define BATT_3QUARTER_ICO "\uf241"
 #define BATT_EMPTY_ICO "\uf244"
-#define BATT_CHARGING_ICO "\uf0e7"
+#define BATT_CHARGING_ICO "\uf1e6"
 
 void Battery::collect()
 {
