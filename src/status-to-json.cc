@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
             }
         }
         cout << "]," << endl;
-        sleep(2);
+        sleep(5);
     }
     cout << "]" << endl;
 }
