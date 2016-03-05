@@ -7,6 +7,10 @@ Note that this depends on Boost.
 
 ``` bash
 $ git clone https://github.com/Edholm/status-to-json.git
+```
+Make the necessary changes in the header files. Wlan interface name etc.
+
+```
 $ cd status-to-json
 $ make
 $ cp bin/status-to-json ~/.i3
