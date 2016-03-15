@@ -89,6 +89,8 @@ string Network::generate_json() {
             freeifaddrs(ifap);
             return Common::map_to_json(m);
         }
-        return "";
+        m["full_text"] = " <no network> ";
+        m["color"] = COLOR_WARN;
+        return Common::map_to_json(m);
     }
 };
