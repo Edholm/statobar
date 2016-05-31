@@ -1,4 +1,4 @@
-status-to-json
+statobar
 ==========
 This is an alternative to Conky that I wrote as an exercise in C++. Saves me a few CPU cycles compared to Conky and gives me more customizability.
 
@@ -6,21 +6,21 @@ This is an alternative to Conky that I wrote as an exercise in C++. Saves me a f
 Note that this depends on Boost.
 
 ``` bash
-$ git clone https://github.com/Edholm/status-to-json.git
+$ git clone https://github.com/Edholm/statobar.git
 ```
 Make the necessary changes in the header files. Wlan interface name etc.
 
 ```
-$ cd status-to-json
+$ cd statobar
 $ make
-$ cp bin/status-to-json ~/.i3
+$ cp bin/statobar ~/.i3
 ```
 
 ## How to use
 In your i3 config, put this in the `bar` section:
 
 ```
-status_command    $HOME/.i3/status-to-json
+status_command    $HOME/.i3/statobar
 ```
 
 then restart i3: 

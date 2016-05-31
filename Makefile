@@ -1,4 +1,4 @@
-NAME=status-to-json
+NAME=statobar
 CFLAGS=-Iincludes $(shell pkg-config --libs --cflags gio-2.0) -g -Wall -std=c++11 -o bin/$(NAME)
 SRCS=src/*.cc
 LIBS=-lasound -liw
