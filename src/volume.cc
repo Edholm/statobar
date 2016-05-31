@@ -11,25 +11,40 @@ using namespace std;
 
 void Volume::init_mixer() {
     int err;
-    if ((err = snd_mixer_open(&h_mixer, 1)) < 0)
+    if ((err = snd_mixer_open(&h_mixer, 1)) < 0) {
         error_close("Mixer open error: %s\n", err, NULL);
+        return;
+    }
 
-    if ((err = snd_mixer_attach(h_mixer, ATTACH)) < 0)
+    if ((err = snd_mixer_attach(h_mixer, ATTACH)) < 0){
             error_close("Mixer attach error: %s\n", err, h_mixer);
+        return;
+    }
 
-    if ((err = snd_mixer_selem_register(h_mixer, NULL, NULL)) < 0)
+    if ((err = snd_mixer_selem_register(h_mixer, NULL, NULL)) < 0){
             error_close("Mixer simple element register error: %s\n", err,
                         h_mixer);
+        return;
+    }
 
-    if ((err = snd_mixer_load(h_mixer)) < 0)
+    if ((err = snd_mixer_load(h_mixer)) < 0) {
             error_close("Mixer load error: %s\n", err, h_mixer);
+        return;
+    }
 
     snd_mixer_selem_id_alloca(&sid);
-    snd_mixer_selem_id_set_index(sid, 0);
-    snd_mixer_selem_id_set_name(sid, SELEM_NAME);
+    if(sid) {
+        snd_mixer_selem_id_set_index(sid, 0);
+        snd_mixer_selem_id_set_name(sid, SELEM_NAME);
+    } else {
+        error_close("Mixer ID is null", 0, h_mixer);
+        return;
+    }
 
-    if ((elem = snd_mixer_find_selem(h_mixer, sid)) == NULL)
+    if ((elem = snd_mixer_find_selem(h_mixer, sid)) == NULL) {
             error_close("Cannot find simple element\n", 0, h_mixer);
+        return;
+    }
 
     setup_failed = false;
 }
