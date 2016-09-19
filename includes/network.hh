@@ -8,7 +8,7 @@
 
 class Network: public Generator {
 private:
-    const char* INTERFACE = "wlan0";
+    const char* INTERFACE = "wlp2s0";
     struct winfo
     {
         std::string essid;
