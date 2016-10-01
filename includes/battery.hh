@@ -19,8 +19,8 @@ private:
         battery_state state;
     };
     const std::string BAT0_PATH = "/sys/class/power_supply/BAT0/";
-    const std::string ENERGY_NOW_FILE = "energy_now";
-    const std::string ENERGY_FULL_FILE = "energy_full";
+    const std::string ENERGY_NOW_FILE = "charge_now";
+    const std::string ENERGY_FULL_FILE = "charge_full";
     const std::string STATUS_FILE = "status";
 
     battery bat0;

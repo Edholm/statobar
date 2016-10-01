@@ -19,6 +19,6 @@ clean:
 	rm -f Makefile~
 
 deploy:
-	rm ~/.i3/$(NAME)
-	cp bin/$(NAME) ~/.i3/$(NAME)
+	rm ~/.bin/$(NAME)
+	cp bin/$(NAME) ~/.bin/$(NAME)
 	i3-msg restart
