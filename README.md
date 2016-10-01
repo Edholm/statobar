@@ -3,7 +3,7 @@ statobar
 This is an alternative to Conky that I wrote as an exercise in C++. Saves me a few CPU cycles compared to Conky and gives me more customizability.
 
 ## Compile & install
-Note that this depends on Boost.
+Note that this depends on Boost and will crash if you do not have bluez installed and started
 
 ``` bash
 $ git clone https://github.com/Edholm/statobar.git
