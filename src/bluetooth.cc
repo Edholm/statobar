@@ -126,7 +126,8 @@ vector<string> Bluetooth::connected_names(vector<string>* devices) {
 string Bluetooth::generate_json() {
     GError *err = NULL;
     GDBusProxy* bus = dbus_get_bus(BLUEZ_OBJECT_PATH.c_str(), DBUS_PROP_INT_NAME.c_str(), err);
-    if(err) {
+    if(err || !bus) {
+	g_clear_error(&err);
         return "";
     }
 
